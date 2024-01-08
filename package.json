@@ -1,0 +1,30 @@
+{
+  "name": "namastereact-kaviya",
+  "version": "1.0.0",
+  "description": "This is namaste javascript",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaviyabakiyavel/NamasteReact-Kaviya.git"
+  },
+  "keywords": [
+    "react",
+    "namastereact"
+  ],
+  "author": "kaviya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaviyabakiyavel/NamasteReact-Kaviya/issues"
+  },
+  "homepage": "https://github.com/kaviyabakiyavel/NamasteReact-Kaviya#readme",
+  "dependencies": {
+    "parcel": "^2.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}
