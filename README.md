@@ -19,8 +19,20 @@
   - Tree Shaking - remove unused code 
   - Different dev and prod bundles 
   
+  # Two Types of Export/Imports
 
+- Default export and import 
+  export default component
+  import component from "path"
 
+- Named Export/Import
+  export const component;
+  import {component} from "path"
+
+  # React Hooks
+  utility function 
+- useState()
+- useEffect()
 
 
  

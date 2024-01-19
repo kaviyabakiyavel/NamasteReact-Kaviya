@@ -115,58 +115,10 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
-export const Header = () => {
-  return (
-    <div className="header">
-      <div className="logoContainer">
-        <img
-          className="logo"
-          src="https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png"
-        />
-      </div>
-      <div className="nav-items">
-        <NavItems />
-      </div>
-    </div>
-  );
-};
-
-export const NavItems = () => {
-  return (
-    <ul>
-      <li>Home</li>
-      <li>About Us</li>
-      <li>Contact Us</li>
-      <li>Cart</li>
-    </ul>
-  );
-};
-
-export const Body = () => {
-  return (
-    <div className="body">
-      <div className="body">
-        <div className="search">Search</div>
-        <div className="res-container">
-          <RestaurantContainer />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export const RestaurantContainer = () => {
-  return (
-    <div className="res-card">
-      <div>Meghana Foods</div>
-    </div>
-  );
-};
-
-export const Footer = () => {
-  return <div className="footer"></div>;
-};
+import ReactDOM from "react-dom/client";
+import Header from "./src/component/Header.js";
+import Body from "./src/component/Body.js";
+import Footer from "./src/component/Footer.js";
 
 export const AppLayout = () => {
   return (
