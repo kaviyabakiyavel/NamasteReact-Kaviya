@@ -119,15 +119,51 @@ import ReactDOM from "react-dom/client";
 import Header from "./src/component/Header.js";
 import Body from "./src/component/Body.js";
 import Footer from "./src/component/Footer.js";
+import About from "./src/component/About.js";
+import Contact from "./src/component/Contact.js";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Error from "./src/component/Error.js";
+import RestaurantMenu from "./src/component/RestaurantMenu.js"
 
 export const AppLayout = () => {
   return (
     <div className="app">
       <Header />
-      <Body />
+      <Outlet />
+      {/** if path is / , then render header component */}
+      {/** if path is /about then render about component */}
+      {/** if path is /contact then render contact conpoennt  */}
+      {/**outlet will render those component */}
     </div>
   );
 };
 
+//createBrowserRouter takes list of paths
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/restaurants/:resId", /**dynamic routing*/
+        element: <RestaurantMenu />,
+      },
+    ],
+    errorElement: <Error />,
+  },
+]);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+root.render(<RouterProvider router={appRouter} />);
