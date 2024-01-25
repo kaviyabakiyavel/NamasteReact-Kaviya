@@ -1,4 +1,3 @@
-
 import { CONST_URL } from "../utils/constants";
 
 const RestaurantCard = (props) => {
@@ -13,22 +12,22 @@ const RestaurantCard = (props) => {
     cloudinaryImageId,
   } = props;
   return (
-    <div className="res-card">
+    //hardcoded w-[200]
+    <div
+      className="m-4 p-4 w-[320px] h-[500px] rounded-lg bg-gray-100 hover:bg-gray-200"
+    >
       <img
-        className="res-logo"
+        className=" w-[320px] h-[200px] rounded-lg"
         alt="res-logo"
-        src={
-          CONST_URL +
-          cloudinaryImageId
-        }
+        src={CONST_URL + cloudinaryImageId}
       />
-      <h3>{resName}</h3>
-      <h4>{cuisine}</h4>
-      <h4>{rating}</h4>
-      <h4>{costOfTwo}</h4>
-      <h4>{location}</h4>
-      <h4>{area}</h4>
-      <h3>{deliveryTime}</h3>
+      <h3 className="font-bold py-4 text-md">{resName}</h3>
+      <h5>{cuisine}</h5>
+      <h5>{rating}</h5>
+      <h5>{costOfTwo}</h5>
+      <h5>{location}</h5>
+      <h5>{area}</h5>
+      <h5>{deliveryTime}</h5>
     </div>
   );
 };

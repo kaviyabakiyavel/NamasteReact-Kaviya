@@ -114,7 +114,7 @@
  *     - Contact
  */
 
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./src/component/Header.js";
 import Body from "./src/component/Body.js";
@@ -123,8 +123,22 @@ import About from "./src/component/About.js";
 import Contact from "./src/component/Contact.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Error from "./src/component/Error.js";
-import RestaurantMenu from "./src/component/RestaurantMenu.js"
+import RestaurantMenu from "./src/component/RestaurantMenu.js";
+// import Grocery from './src/component/Grocery.js'
 
+// bundle size loaded into one file called index.js
+// but we can make own bundle for each module to avoid over loading multiple components into one single bundle
+// Makemytrip application refer for each landing page having separate bundle file
+// Make always application into smaller bundle . it helps us to load the application faster
+
+//Different word for reducing bunding size
+//Chunking
+//Code splitting
+//Dynamic bundling
+//Lazy Loading
+//On Demand Loading
+
+const Grocery = lazy(() => import("./src/component/Grocery.js"));
 export const AppLayout = () => {
   return (
     <div className="app">
@@ -157,8 +171,16 @@ const appRouter = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/restaurants/:resId", /**dynamic routing*/
+        path: "/restaurants/:resId" /**dynamic routing*/,
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
       },
     ],
     errorElement: <Error />,

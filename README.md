@@ -43,7 +43,20 @@
 - Outlet
 - Link
 - useRouteError
-- Two types of Routing in wwe page 
-      - client side routing (out local application is client side routing , because when we change the menu request not going to backend / server )
-      - server side routing (make request to server and index.html comes from server side )
-- Single page application nothing but render all the components in one app doesn't make any api call to the backend to load the new UI 
+- Two types of Routing in web page - client side routing (out local application is client side routing , because when we change the menu request not going to backend / server ) - server side routing (make request to server and index.html comes from server side )
+- Single page application nothing but render all the components in one app doesn't make any api call to the backend to load the new UI
+
+//Different word for reducing bundling size
+-Chunking
+-Code splitting
+-Dynamic bundling
+-Lazy Loading
+-On Demand Loading
+
+//Different way of writing CSS
+-Styled component (Mostly used on industry)
+-MUI react library
+-Bootstrap
+-Chakra UI
+-Sass
+-Tailwind css
