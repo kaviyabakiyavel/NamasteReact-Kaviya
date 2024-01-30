@@ -114,7 +114,7 @@
  *     - Contact
  */
 
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./src/component/Header.js";
 import Body from "./src/component/Body.js";
@@ -124,6 +124,12 @@ import Contact from "./src/component/Contact.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Error from "./src/component/Error.js";
 import RestaurantMenu from "./src/component/RestaurantMenu.js";
+import UserContext from "./src/utils/UserContext.js";
+import { useState } from "react";
+import { Provider } from "react-redux";
+import appStore from "./src/utils/slices/appStore.js";
+import Card from './src/component/Cart.js'
+
 // import Grocery from './src/component/Grocery.js'
 
 // bundle size loaded into one file called index.js
@@ -140,15 +146,26 @@ import RestaurantMenu from "./src/component/RestaurantMenu.js";
 
 const Grocery = lazy(() => import("./src/component/Grocery.js"));
 export const AppLayout = () => {
+  const [userName, setUserName] = useState("");
+  useEffect(() => {
+    const data = {
+      name: "Kaviya Bakiyavel",
+    };
+    setUserName(data.name);
+  }, []);
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-      {/** if path is / , then render header component */}
-      {/** if path is /about then render about component */}
-      {/** if path is /contact then render contact conpoennt  */}
-      {/**outlet will render those component */}
-    </div>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app">
+          <Header />
+          <Outlet />
+          {/** if path is / , then render header component */}
+          {/** if path is /about then render about component */}
+          {/** if path is /contact then render contact conpoennt  */}
+          {/**outlet will render those component */}
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -171,6 +188,10 @@ const appRouter = createBrowserRouter([
         element: <Contact />,
       },
       {
+        path: "/cart",
+        element: <Card />,
+      },
+      {
         path: "/restaurants/:resId" /**dynamic routing*/,
         element: <RestaurantMenu />,
       },
@@ -182,6 +203,7 @@ const appRouter = createBrowserRouter([
           </Suspense>
         ),
       },
+     
     ],
     errorElement: <Error />,
   },

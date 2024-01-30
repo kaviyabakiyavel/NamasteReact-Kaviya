@@ -1,13 +1,16 @@
-import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
   const [filteredRes, setFilteredRes] = useState();
   const [searchText, setSearchText] = useState();
+  //calling higherorder component
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
   useEffect(() => {
     fetchData();
   }, []);
@@ -38,6 +41,8 @@ const Body = () => {
       <h1>Looks like you're offline!! Please check your internet connection</h1>
     );
   }
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   //conditional rendering
   return listOfRes.length === 0 ? (
@@ -77,21 +82,43 @@ const Body = () => {
             Top Rated Restaurants
           </button>
         </div>
+        <div className="m-4 p-4 flex items-center ">
+          <input
+            type="text"
+            className="border border-solid border-black "
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          ></input>
+        </div>
       </div>
       <div className="flex flex-wrap justify-center">
         {filteredRes?.map((obj) => (
           <Link key={obj?.info?.id} to={"/restaurants/" + obj?.info?.id}>
-            <RestaurantCard
-              id={obj?.info?.id}
-              resName={obj?.info?.name}
-              cuisine={obj?.info?.cuisines}
-              rating={obj?.info?.avgRating}
-              costOfTwo={obj?.info?.costForTwo}
-              location={obj?.info?.locality}
-              area={obj?.info?.areaName}
-              deliveryTime={obj?.info?.deliveryTime}
-              cloudinaryImageId={obj?.info?.cloudinaryImageId}
-            />
+            {obj.info.promoted ? (
+              <RestaurantCardPromoted
+                id={obj?.info?.id}
+                resName={obj?.info?.name}
+                cuisine={obj?.info?.cuisines}
+                rating={obj?.info?.avgRating}
+                costOfTwo={obj?.info?.costForTwo}
+                location={obj?.info?.locality}
+                area={obj?.info?.areaName}
+                deliveryTime={obj?.info?.deliveryTime}
+                cloudinaryImageId={obj?.info?.cloudinaryImageId}
+              />
+            ) : (
+              <RestaurantCard
+                id={obj?.info?.id}
+                resName={obj?.info?.name}
+                cuisine={obj?.info?.cuisines}
+                rating={obj?.info?.avgRating}
+                costOfTwo={obj?.info?.costForTwo}
+                location={obj?.info?.locality}
+                area={obj?.info?.areaName}
+                deliveryTime={obj?.info?.deliveryTime}
+                cloudinaryImageId={obj?.info?.cloudinaryImageId}
+              />
+            )}
           </Link>
         ))}
       </div>
